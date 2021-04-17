@@ -1,32 +1,46 @@
-int main()
+void func1(int *A, int p, int q, int r)      //排序函数
 {
-
 	int i, j, k;
 
-	int A[20] = {1,1,1,1,1,1,1,1,1,/*前面的1是无关于排序的*/     0,2,4,6,8,10,/*L数组*/   1,3,5,7,9/*R数组*/};
-	int p = 9;  //为L数组的开始下标
-	int q = 14; //L数组的结束下标
-	int r = 20; //数组长度
-
 	int n1 = q - p + 1;   //L长度
-	int n2 = r - q - 1;   //R长度
+	int n2 = r - q;   //R长度
 	int L[n1], R[n2];
-	for(i = 0; i < n1; i++)  L[i] = A[p+i];
-	for(i = 0; i < n2; i++)  R[i] = A[q+i+1];
+	for(i = 0; i < n1; i++)  L[i] = *(A+p+i-1);
+	for(i = 0; i < n2; i++)  R[i] = *(A+q+i);
 	
 	i = 0, j = 0;
-	for(k = p; k < r; k++)
+	for(k = p-1; k < r; k++)
 	{
-		if( L[i] <= R[j]) 
+		if(  i < n1 && (j == n2 || L[i] <= R[j]) )
 		{
-			A[k] = L[i];
+			*(A+k) = L[i];
 			i++;
 		}
 		else
 		{
-			A[k] = R[j];
+			*(A+k) = R[j];
 			j++;
 		}
 	}
+}
+void func2(int *arr, int p, int r)
+{
+	int q;
+	if(p < r)
+	{
+		q = (p+r)/2;
+		func2(arr,p,q);
+		func2(arr,q+1,r);
+		func1(arr,p,q,r);
+
+	}
+
+}
+
+int main()
+{
+	int A[20] = {10,9,81,7,63,5,4,31,2,1,0,12,2,33,4,105,6,97,88,9}; 
+	func2(A,1,20);
+
 	return 0;
 }
