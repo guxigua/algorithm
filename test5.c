@@ -1,4 +1,4 @@
-#include <stdio.h>
+//把一个数组建成最大堆
 
 void MAX_HEAPIFY(int *arr, int i, int size)
 {
