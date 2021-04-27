@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct list
+struct list			//定义一个能组成双链表的结构
 {
 	struct list *previous; 
 	struct list *next;
 	int key;
 };
-struct list* enter_Bucket(struct list *list,int key)
+struct list* enter_Bucket(struct list *list,int key)		//把关键字放入链表的key中
 {
 	struct list * temp;
 	if(list == NULL)
@@ -31,7 +31,7 @@ struct list* enter_Bucket(struct list *list,int key)
 	return temp;
 }
 
-void get_num(struct list **list, int *arr,  int size)
+void get_num(struct list **list, int *arr,  int size)		//桶中的数字取出，先进先出
 {
 	int i=0;
 	int j=0;
@@ -48,7 +48,7 @@ void get_num(struct list **list, int *arr,  int size)
 		}
 	}
 }
-void add(int *arr, int size, int higest)
+void add(int *arr, int size, int higest)		//排序
 {
 	int i,j,k;
 	int temp;
