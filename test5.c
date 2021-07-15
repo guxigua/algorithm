@@ -1,24 +1,26 @@
-void MAX_HEAPIFY(int *arr, int i, int size)
+void ntheap(int *arr, int i, int size)
 {
-	if(size == 1 )
-	return;
-	int L	=	2*i;	
-	int R	=	2*i+1;
-	int largest;
-	int temp;
-	if( L <= size && arr[L-1] > arr[i-1]) largest = L;
-	else largest = i;
+        if(size == 1)
+                return;
+        int left  = 2 * i;
+        int right = left + 1;
+        int largest;
+        int temp;
 
-	if(R <= size && arr[R-1] > arr[largest-1] ) largest = R;
-	
-	if (largest != i)
-	{
-		temp = arr[i-1];
-		arr[i-1] = arr[largest-1];
-		arr[largest-1] = temp;
-		MAX_HEAPIFY(arr, largest, size);
-	}
+        if(left <= size && arr[left - 1] < arr[i-1])
+                largest = left;
+        else
+                largest = i;
+        if(right <= size && arr[right - 1] < arr[largest - 1])
+                largest = right;
+        if(largest != i){
+                temp = arr[i-1];
+                arr[i-1] = arr[largest - 1];
+                arr[largest - 1] = temp;
+                ntheap(arr, largest,size);
+        }
 }
+
 void build_max_heap(int *arr, int size)
 {
 	int  i;
